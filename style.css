@@ -1,0 +1,164 @@
+/* Contacto */
+html{
+cursor: progress;
+}
+
+body{
+    min-height:100vh;
+    margin: 0%;
+    font-family: 'Montserrat', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    padding-bottom: 100px;
+}
+form{
+    width: 300px;
+    margin-inline: auto ;
+}
+form h2{
+    text-align: center;
+
+}
+input,textarea{
+    display: block;
+    padding: .7em;
+    margin-bottom: 1.4em;
+    background-color: #b1b1b1;
+    border-radius: .3em;
+    border:none; 
+    width: 100%;
+    box-sizing:border-box;
+    
+
+}
+textarea{
+    resize:vertical
+}
+
+input:focus{
+    outline: 1px solid black; 
+
+}
+button{
+    background-color: #164863;
+    color:white;
+    border: none;
+    border-radius: .3em;
+    padding: .7em;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition:
+    background-color .2s, 
+    border-bottom 2s;
+}
+button:hover,
+button:focus{
+    border-radius: .4em;
+    border-bottom: 2px solid #427D9D ;
+    background-color:#427D9D ;
+    outline: 1px solid #427D9D  ;   
+}  
+/* Index */
+.cabeza{
+    display: flex;
+    gap: 8em;
+    align-items: center;
+    justify-content: center;
+    background-color: #164863;
+    Color: white;
+    padding-right: 1em;
+
+    flex-wrap: wrap;
+
+}
+/* Index y contacto */
+.container{
+    width: 800px;
+    margin-inline: auto;
+
+
+}
+
+
+.cabeza img{
+    padding: 1em;
+    border-radius: 20px;
+    width: 200px;
+}
+ul{
+    list-style: none;
+    margin-top: 2px;
+    justify-content: space-between !important;
+    gap: 4em !important;
+
+}
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.cabeza li {
+    padding: 1em;
+}
+header{
+    background-color: #164863;
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+/* aside */
+
+.grid{
+    display: grid;
+    grid-template-columns: 75% auto;
+    gap: 50px;
+}
+.Late{
+    
+    position: relative;
+    width: 100%;
+    text-align: center;    
+}
+.Late a{
+    margin-inline: auto;
+}
+aside a{
+    position: relative;
+    width: 100%;
+   
+    
+}
+.redessociales img{
+    width: 30px;
+}
+
+.redessociales{
+    aspect-ratio: 1;
+    width: min-content;
+    display: grid;
+    gap:1em;
+    margin-inline: auto;
+
+}
+/* Footer */
+footer{
+    background-color: #164863;
+    text-align: center;
+    color:white;
+    padding: .3em;
+    margin-top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.alfabeto{
+    overflow-wrap: break-word;
+}

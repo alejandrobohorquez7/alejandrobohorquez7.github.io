@@ -1,0 +1,55 @@
+body{
+    margin:0px;
+}
+img{
+    display: block;
+    max-width: 100%;
+
+}
+
+a{
+    text-decoration: none;
+    color: #BBE1FA;
+}
+ul{
+    list-style: none;
+    display: flex;
+    gap:30px;
+    
+
+}
+
+.wrapper{
+    padding: 0px 300px;
+
+
+}
+.glosarios{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:30px;
+    
+}
+.glosarios-lista{
+    
+background-color:#f8f8f8fa ;
+border-radius: 10px;
+text-align: center;
+}
+.glosarios-lista a{
+    color:#0F4C75;
+    font-size: x-large;
+}
+.glosarios-lista a img{
+    border-radius: 10px;
+}
+footer{
+   background-color: #1B262C;
+   text-align: center;
+   padding: 20px 0px 20px 0px;
+   position: relative;
+   
+   color: white;
+   font-size: x-large;
+   margin-top: 30px;
+}

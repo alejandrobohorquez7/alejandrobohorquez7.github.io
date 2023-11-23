@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="cabeza container">
+        <img src="FotoP/Profile.jpg" alt="FotoHojadevida" />
+        <div>
+          <h1>Hoja de vida</h1>
+          <p>Jose Alejandro Bohorquez Suarez</p>
+        </div>
+      </div>
+      <nav class="container">
+        <ul class="cabeza">
+          <li><a href="index.html">Inicio</a></li>
+          <li>
+            <a href="Glosario/glosario.html">Mi Glosario</a>
+          </li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="cifrado.html">Cifrado</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+   <body>
+       <h1>Cifrado del CESAR con clave</h1>
+   
+       <h2>Par�metros de Encripci�n</h2>
+       <form name="FormularioCiframiento">
+           <label for="Rotacion">Rotaci�n alfabeto:</label>
+           <input type="text" name="Rotacion" id="Rotacion">
+           
+           <input type="checkbox" name="Usar_Clave" id="Usar_Clave">
+           <label for="Usar_Clave">Activar uso de clave</label>
+           
+           <label for="Clave">Clave: </label>
+           <input type="text" name="Clave" id="Clave">
+           
+           <label for="Desplazamiento_Clave">Desplazamiento_Clave: </label>
+           <input type="text" name="Desplazamiento_Clave" id="Desplazamiento_Clave">     
+   
+           
+           <h2>Texto a Procesar:</h2>
+           <label style='display: inline;'>Ingrese mensaje original</label>
+           
+           <textarea rows='4' cols='70' id="Texto_Origen" name="Texto_Origen" placeholder="copie aqu� el texto de su mensaje (m�ximo 1000 caracteres)" ></textarea>
+           
+           
+           <button type="button" onclick='Cifrado()' >Cifrar</button>&nbsp; &nbsp; &nbsp; 
+           <button type="button" onclick='Descifrado()' >Descifrar</button>
+           
+           <hr>
+           <div class="alfabeto">
+             <p id="Alfabeto_Origen" >Alfabeto Origen :  </p>
+             <p id="Alfabeto_Cifrado">Alfabeto Cifrado:  </p>
+           </div>
+           <hr> 
+           <label for="Resultado" style='display: inline;'>Texto convertido:</label>
+           <div id="Resultado" style='width: 520px; border: 1px solid #2255aa; padding: 5;'>
+               <p id="Texto_Cifrado">&nbsp;</p> 
+           </div>       
+   
+       </form></main>
+     
+    <footer>
+      <p> © Copyright</p>
+    </footer>
+
+    <script>
+        //  ------- Iniciamos segmento de c�digo JavaScript
+   
+        function CifrarAlfabeto(AlfabetoOrigen) {
+   
+           var Rotacion = parseInt(document.getElementById("Rotacion").value);
+   
+           // ---- 1o ejecutamos la rotaci�n del alfabeto
+           var AlfabetoCifrado = AlfabetoOrigen.substr(Rotacion, AlfabetoOrigen.length - Rotacion) + AlfabetoOrigen.substr(0, Rotacion);
+   
+               var IndiceClave = 0;
+               var IndiceCifrado = 0;
+               var Limite = AlfabetoOrigen.length;         
+               var Letra = "";
+               var Clave = "";
+               var DesplazamientoClave = 0;
+               var ClaveTempo = "";
+               var AlfabetoClave = "";
+   
+           // ---- 2o se verifica Requerimiento y se inserta la CLAVE en el Alfabeto Cifrado
+   
+           var UsarClave = document.FormularioCiframiento.Usar_Clave; //accede al bot�n check box 
+   
+   
+   
+           if (UsarClave.checked == true) { 
+               //  si el check box seleccionado, entonces se realiza la inserci�n de la clave 
+               FraseClave = document.getElementById("Clave").value;
+   
+               DesplazamientoClave = parseInt(document.getElementById("Desplazamiento_Clave").value);
+                                                                  
+               //--- 3o Eliminamos caracteres repetidos de la clave
+               for (IndiceClave = 0 ; IndiceClave < FraseClave.length; IndiceClave++) {
+    
+                  Letra = FraseClave.substr(IndiceClave, 1);
+   
+                  if (ClaveTempo.indexOf(Letra) == -1) {
+                     // --- no existe esta letra, por lo tanto se toma para la CLAVE VERIFICADA
+                     ClaveTempo = ClaveTempo + Letra;
+                  }
+   
+               }
+   
+               FraseClave = ClaveTempo;
+   
+               // --- 4o incorporamos la clave dentro de la cadena de alfabeto cifrado
+               IndiceCifrado = 0;   //--- para llevar del alfabeto cifrado con clave
+               IndiceClave = 0;     //--- para llevar el control de sitio donde se insertar� la clave
+     
+              while(IndiceClave < DesplazamientoClave ) {
+    
+                   Letra = AlfabetoCifrado.substr(IndiceCifrado, 1);
+                   
+                   //--- Validamos la existencia de cada letra de la frase clave
+                   //    dentro del alfabeto cifrado
+                   if (FraseClave.indexOf(Letra) == -1 ) {
+                      // --- la Clave no contiene la letra del alfabeto cifrado
+                      //     entonce dicha letra se inserta en la posici�n actual
+                      AlfabetoClave = AlfabetoClave + Letra;
+                     
+                      // --- incrementamos los dos �ndices
+                      IndiceClave++;
+                      IndiceCifrado++;
+                   } else {
+                      // --- La letra cifrada si existe en la clave, entoces, no se transfiere
+                      //     �nicamente se incrementa el �ndice del alfabeto Cifrado
+                      IndiceCifrado++;
+                   }
+                
+               }
+   
+               // --- Hasta aqu� est� listo el alfabeto cifrado antes de la clave
+               //     Ahora insertamos la CLAVE VERIFICADA (sin letras repetidas) 
+               AlfabetoClave = AlfabetoClave + FraseClave;
+                              
+               // --- Ahora insertamos la parte del alfabeto que va despu�s de la clave insertada
+   
+               for (IndiceClave = IndiceCifrado ; IndiceClave < Limite ; IndiceClave++ ) {
+   
+                   Letra = AlfabetoCifrado.substr(IndiceClave, 1);
+                   if (FraseClave.indexOf(Letra) == -1 ){
+                       // -- la Clave no contiene la letra del alfabeto cifrado
+                       //    entonce dicha letra se inserta en la posici�n actual
+                       AlfabetoClave = AlfabetoClave + Letra;
+                       IndiceCifrado++;
+          
+                   } else {
+                       // -- En caso que la letra est� contenida en la clave,  
+                       //    simplemente se pasa por alto unicamente infrementamos el �ndice
+                       IndiceCifrado++;
+                   }
+               }
+    
+               AlfabetoCifrado = AlfabetoClave;       
+               // ----  finaliza el proceso de inserci�n de la clave en el alfabeto cifrado             
+           }
+   
+           return AlfabetoCifrado;
+        }
+   
+   
+        // --- Esta funci�n se encarga de realizar el proceso de ciframiento del texto origen
+        function Cifrado() {
+   
+           var AlfabetoOrigen = " abcdefghijklmn�opqrstuvwxyz0123456789ABCDEFGHIJKLMN�OPQRSTUVWXYZ������������@#$%&/\\=+-*.,;:�?�!<>(){}[]_'";
+   
+           AlfabetoOrigen = AlfabetoOrigen + String.fromCharCode(34);     //--- Agregamos la comilla doble
+           var AlfabetoCifrado = ""; 
+           var TextoOrigen = "";
+           var TextoCifrado = "";
+           var Letra = "";
+           var IndiceTexto = 0;
+           var IndiceCifrado = 0;
+           var LongitudTexto = 0;
+   
+           TextoOrigen = document.getElementById("Texto_Origen").value; 
+           LongitudTexto = TextoOrigen.length;
+   
+           AlfabetoCifrado = CifrarAlfabeto(AlfabetoOrigen);
+   
+           for (IndiceTexto = 0;  IndiceTexto < LongitudTexto; IndiceTexto++) {
+             Letra =   TextoOrigen.substr(IndiceTexto, 1);
+             IndiceCifrado =   AlfabetoOrigen.indexOf(Letra);
+             TextoCifrado = TextoCifrado + AlfabetoCifrado.substr(IndiceCifrado, 1);
+           }
+   
+         // ----- Escribimos el Texto Cifrado Resultante
+   
+           var resultado_Alfabeto_Origen = document.getElementById("Alfabeto_Origen");
+           var resultado_Alfabeto_Cifrado = document.getElementById("Alfabeto_Cifrado");
+           var resultado_Texto_Cifrado = document.getElementById("Texto_Cifrado");       
+   
+           resultado_Alfabeto_Origen.innerHTML  = "Alfabeto Origen : " + AlfabetoOrigen;
+           resultado_Alfabeto_Cifrado.innerHTML = "Alfabeto Cifrado: " + AlfabetoCifrado;
+           resultado_Texto_Cifrado.innerHTML = TextoCifrado;
+   
+         }
+   
+        // --- Esta funci�n se encarga de realizar el proceso de DESCIFRADO del texto previamente cifrado, volvi�ndolo a su estado original
+        function Descifrado() {
+   
+           var AlfabetoOrigen = " abcdefghijklmn�opqrstuvwxyz0123456789ABCDEFGHIJKLMN�OPQRSTUVWXYZ������������@#$%&/\\=+-*.,;:�?�!<>(){}[]_'";
+   
+           AlfabetoOrigen = AlfabetoOrigen + String.fromCharCode(34);     //--- Agregamos la comilla doble
+           var AlfabetoCifrado = ""; 
+           var TextoOrigen = "";
+           var TextoDescifrado = "";
+           var Letra = "";
+           var IndiceTexto = 0;
+           var IndiceCifrado = 0;
+           var LongitudTexto = 0;
+   
+           TextoOrigen = document.getElementById("Texto_Origen").value; 
+           LongitudTexto = TextoOrigen.length;
+   
+           AlfabetoCifrado = CifrarAlfabeto(AlfabetoOrigen);
+   
+           for (IndiceTexto = 0;  IndiceTexto < LongitudTexto; IndiceTexto++) {
+             Letra =   TextoOrigen.substr(IndiceTexto, 1);
+             IndiceCifrado =   AlfabetoCifrado.indexOf(Letra);
+             TextoDescifrado = TextoDescifrado + AlfabetoOrigen.substr(IndiceCifrado, 1);
+           }
+   
+         // ----- Escribimos el Texto Cifrado Resultante
+   
+           var resultado_Alfabeto_Origen = document.getElementById("Alfabeto_Origen");
+           var resultado_Alfabeto_Cifrado = document.getElementById("Alfabeto_Cifrado");
+           var resultado_Texto_Cifrado = document.getElementById("Texto_Cifrado");       
+   
+           resultado_Alfabeto_Origen.innerHTML  = "Alfabeto Origen : " + AlfabetoOrigen;
+           resultado_Alfabeto_Cifrado.innerHTML = "Alfabeto Cifrado: " + AlfabetoCifrado;
+           resultado_Texto_Cifrado.innerHTML = TextoDescifrado;
+   
+       }
+   
+   
+   
+   
+   // Aqu� finaliza el segmento de c�digo JavaScript
+   </script>
+   
+   
+  </body>
+</html>
