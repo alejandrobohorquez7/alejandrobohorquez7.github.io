@@ -73,6 +73,13 @@ button:focus{
     flex-wrap: wrap;
 
 }
+
+.iinde{
+    padding: 1em;
+    border-radius: 20px;
+    width: 200px;
+
+}
 /* Index y contacto */
 .container{
     width: 800px;
